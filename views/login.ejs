@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shortify | Login</title>
+  <link rel="stylesheet" href="/login.css" />
+</head>
+<body>
+
+  <!-- Header / Navbar -->
+  <header class="navbar">
+    <div class="logo">🔗 Shortify</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="#features">Features</a>
+      <a href="/signup">Sign Up</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="info-card">
+      <div class="info-box">
+        <h1>🔗 Shortify</h1>
+        <p>Simplify your links, track clicks, and share smarter with Shortify.</p>
+        <ul>
+          <li>✅ Instantly generate short URLs</li>
+          <li>📊 Track number of clicks in real-time</li>
+          <li>🔒 Safe, private & easy to use</li>
+        </ul>
+        <p>Perfect for marketers, developers, students — anyone who shares links often.</p>
+      </div>
+    </div>
+
+    <div class="login-box">
+      <h2>Login</h2>
+      <form action="/login" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required />
+        <input type="password" name="password" placeholder="Enter your password" id="password" required />
+        <div class="show-password">
+          <input type="checkbox" id="togglePassword" />
+          <label for="togglePassword">Show Password</label>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p class="signup-text">Not a user? <a href="/signup">Sign up here</a></p>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <h2>Why Choose Shortify?</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>🚀 Fast</h3>
+        <p>Generate short links instantly with a blazing fast backend.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🔐 Secure</h3>
+        <p>Your data is encrypted and stored safely. We value your privacy.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📈 Analytics</h3>
+        <p>Real-time click tracking and traffic monitoring included.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Shortify. All rights reserved. | <a href="#">Privacy</a> | <a href="#">Contact</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('togglePassword').addEventListener('change', function () {
+      const passwordInput = document.getElementById('password');
+      passwordInput.type = this.checked ? 'text' : 'password';
+    });
+  </script>
+</body>
+</html>
