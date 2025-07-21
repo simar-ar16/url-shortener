@@ -1,0 +1,217 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+
+    margin: 0;
+  padding-top: 80px; /* Adjust based on navbar height */
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(to right, #667eea, #764ba2); /* OR use your exact gradient */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar nav a:hover {
+  color: #ffd369;
+}
+
+/* Container Layout */
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 50px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* URL Shortener Box */
+.login-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  width: 350px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.login-box input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #ffd369;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+  background-color: #f6c244;
+}
+
+.login-box .result {
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+.error-box {
+  margin-top: 10px;
+  background-color: rgba(255, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Info Card (Left Side) */
+.info-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 400px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.info-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.info-card p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.info-card,
+.login-box {
+  flex: 1;
+  min-width: 400px;
+  max-width: 500px;
+}
+
+/* Features Section */
+.features-section {
+  padding: 60px 40px 40px;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #ffd369;
+  text-decoration: none;
+  margin: 0 8px;
+}
+/* Add this section at the end of your CSS file */
+
+/* Hover Effects for Cards */
+.login-box:hover,
+.info-card:hover,
+.feature-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Smooth transition for normal state */
+.login-box,
+.info-card,
+.feature-card {
+  transition: all 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,139 @@
+/* Signup Page CSS */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #e0e7ff, #f7f9fc);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6a5acd;
+  padding: 15px 30px;
+  color: white;
+  font-weight: bold;
+}
+
+.navbar .logo {
+  font-size: 1.3em;
+}
+
+.navbar nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.navbar nav a:hover {
+  text-decoration: underline;
+}
+
+
+/* Container */
+.main-container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); /* Adjust for navbar and footer height */
+  padding: 20px;
+
+}
+/* Signup Box Styling */
+.login-box {
+  max-width: 400px;
+  width: 100%;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease;
+}
+
+.login-box h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+button {
+  padding: 10px;
+  background: #6a5acd;
+  color: white;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #5a4bcb;
+}
+
+.signup-text {
+  margin-top: 10px;
+  font-size: 0.95em;
+  text-align: center;
+}
+
+.signup-text a {
+  color: #6a5acd;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #f0f0f0;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 0.95em;
+  color: #333;
+  margin-top: 40px;
+}
+
+footer a {
+  color: #6a5acd;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

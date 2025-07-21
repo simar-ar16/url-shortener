@@ -10,6 +10,7 @@ function checkForAuthentication(req,res,next){
     const user=getUser(token);
 
     req.user=user;
+     res.locals.user = user;
     return next();
 }
 

@@ -3,10 +3,9 @@ const URL=require('../models/url');
 
 async function handleGenerateNewShortURL(req,res){
     const body=req.body;
-    if(!body.url){const allUrls = await URL.find({});
+    if(!body.url){
     return res.render('home', {
       id: null,
-      urls: allUrls,
       error: "Please enter a valid URL"
     //   return res.status(400).json({error:'url is required'});
     });}

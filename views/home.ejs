@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shortify | Home</title>
     <link rel="stylesheet" href="/home.css">
 
 </head>
@@ -38,6 +38,7 @@
                 <th>Redirect</th>
                 <th>Clicks</th>
                 <th>Short URL</th>
+                <th>Delete URL?</th>
             </thead>
 
             <tbody>
@@ -60,7 +61,7 @@
                                 http://localhost:8001/url/<%= url.shortID %>
                             </a>
                         </td>
-                        <td>
+                        <td class="btn-cell">
                             <form action="/url/delete/<%= url.shortID %>" method="POST"
                                 onsubmit="return confirmDelete()">
                                 <button type="submit"
@@ -76,7 +77,29 @@
         </table>
         <% } %>
 </div>
+<% if (user) { %>
+  <div class="button-container">
+    <% if (user.role === 'ADMIN') { %>
+      <a href="/admin/analytics">
+        <button class="admin-btn">📊 Admin Analytics</button>
+      </a>
+    <% } %>
+
+    <form action="/user/logout" method="GET">
+      <button type="submit" class="logout-btn"><a href="#" onclick="confirmLogout(event)" class="logouta">🚪 Logout</a></button>
+    </form>
+  </div>
+<% } %>
+
+
 <script>
+      function confirmLogout(event) {
+    event.preventDefault(); // prevent link default behavior
+    const confirmed = confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      window.location.href = "/user/logout"; // redirect if confirmed
+    }
+  }
     function confirmDelete(shortId) {
         if (confirm("Are you sure you want to delete this URL?")) {
             fetch(`/delete/${shortId}`, { method: "DELETE" })

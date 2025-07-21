@@ -34,7 +34,10 @@
 
     <div class="login-box">
       <h2>Login</h2>
-      <form action="/login" method="POST">
+      <% if (typeof error !== 'undefined') { %>
+  <div class="error-message"><%= error %></div>
+<% } %>
+      <form action="/user/login" method="POST">
         <input type="email" name="email" placeholder="Enter your email" required />
         <input type="password" name="password" placeholder="Enter your password" id="password" required />
         <div class="show-password">
@@ -67,9 +70,11 @@
   </section>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Shortify. All rights reserved. | <a href="#">Privacy</a> | <a href="#">Contact</a></p>
-  </footer>
+ <footer>
+  <p>&copy; 2025 Shortify. All rights reserved. | <a href="/privacy">Privacy</a> |
+  <a href="/terms">Terms & Conditions</a> |
+  <a href="/contact">Contact</a></a></p>
+</footer>
 
   <script>
     document.getElementById('togglePassword').addEventListener('change', function () {
