@@ -8,6 +8,20 @@ const userRoute = require('./routes/user');
 const { checkForAuthentication } = require('./middlewares/auth');
 const adminRoute = require('./routes/admin');
 const app = express();
+
+const session = require('express-session');
+const flash = require('connect-flash');
+
+app.use(session({
+  secret: 'shortify-secret',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
+
+
+
+
 const PORT = 8001;
 
 // MongoDB

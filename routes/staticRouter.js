@@ -19,8 +19,14 @@ router.get('/signup', (req, res) => {
 });
 
 router.get('/home', restrictTo(['NORMAL', 'ADMIN']), async (req, res) => {
-  const allUrls = await URL.find({ createdBy: req.user._id });
-  res.render("home", { urls: allUrls });
+   const urls = await URL.find({ createdBy: req.user._id }).sort({ createdAt: -1 });
+
+  return res.render('home', {
+    id: req.flash('id')[0] || null,
+    error: req.flash('error')[0] || null,
+    urls,
+    user: req.user
+  });
 });
 
 router.get('/privacy', (req, res) => {

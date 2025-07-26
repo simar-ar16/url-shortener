@@ -1,26 +1,34 @@
 const {nanoid} = require('nanoid');
 const URL=require('../models/url');
 
-async function handleGenerateNewShortURL(req,res){
-    const body=req.body;
-    if(!body.url){
-    return res.render('home', {
-      id: null,
-      error: "Please enter a valid URL"
-    //   return res.status(400).json({error:'url is required'});
-    });}
-        
-    const shortID=nanoid(8);
+// Generates short URL and stores flash messages (success/error) for redirect display
+async function handleGenerateNewShortURL(req, res) {
+  const { url } = req.body;
+
+  if (!url) {
+    req.flash('error', 'Please enter a valid URL');
+    return res.redirect('/home');
+  }
+
+  try {
+    const shortID = nanoid(8);
+
     await URL.create({
-        shortID: shortID,
-        redirectURL: body.url,
-        visitHistory:[],
-        createdBy: req.user._id
+      shortID,
+      redirectURL: url,
+      visitHistory: [],
+      createdBy: req.user._id
     });
-    return res.render('home', {
-        id: shortID,
-    })
+
+    req.flash('id', shortID); // Store generated short ID temporarily
+    return res.redirect('/home'); 
+  } catch (err) {
+    console.error('Error generating URL:', err);
+    req.flash('error', 'Something went wrong. Please try again.');
+    return res.redirect('/home');
+  }
 }
+
 
 async function handleGetAnalytics(req,res){
     const shortID = req.params.shortID;

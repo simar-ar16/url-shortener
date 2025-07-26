@@ -128,24 +128,7 @@ button:hover {
 }
 
 /* Footer Styling */
-footer {
-  background-color: #f0f0f0;
-  padding: 15px 0;
-  text-align: center;
-  font-size: 0.95em;
-  color: #333;
-  margin-top: 40px;
-}
 
-footer a {
-  color: #6a5acd;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
 
 /* Optional Image Styling (if used) */
 .hero-img {
@@ -261,4 +244,20 @@ footer a:hover {
 }
 html {
   scroll-behavior: smooth;
+}
+
+input[type="password"],
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+input[type="password"],
+input[type="text"] {
+  transition: all 0.2s ease;
 }

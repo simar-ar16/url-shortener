@@ -1,115 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shortify | Home</title>
-    <link rel="stylesheet" href="/home.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shortify | Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/home.css">
+  <link rel="stylesheet" href="/footer.css">
 </head>
-
 <body>
-    <h1>URL Shortener</h1>
 
-    <% if (locals.id) { %> <!--locals have all the value that has come from backend -->
-    <p>URL generated: http://localhost:8001/url/<%= id %>
-    </p>
-    <% } %>
-    <% if (locals.error) { %>
-        <div class="error-box">
-        <%= error %>
-        </div>
-    <% } %>
-
-<div>
-    <form method="POST" action="/url">
-        <label>Enter your Original URL</label>
-        <input type="text" name="url" placeholder="https://example.com">
-        <button type="submit">Generate</button>
-    </form>
-</div>
-<div>
-    <% if (locals.urls && urls.length> 0) { %>
-        <table>
-            <thead>
-                <th>S. No</th>
-                <th>ShortID</th>
-                <th>Original URL</th>
-                <th>Clicks</th>
-                <th>Short URL</th>
-                <th>Delete URL?</th>
-            </thead>
-
-            <tbody>
-                <% urls.forEach((url, index)=> { %>
-                    <tr>
-                        <td>
-                            <%= index + 1 %>
-                        </td>
-                        <td>
-                            <%= url.shortID %>
-                        </td>
-                        <td>
-                            <%= url.redirectURL %>
-                        </td>
-                        <td>
-                            <%= url.visitHistory.length %>
-                        </td>
-                        <td>
-                            <a href="http://localhost:8001/url/<%= url.shortID %>">
-                                http://localhost:8001/url/<%= url.shortID %>
-                            </a>
-                        </td>
-                        <td class="btn-cell">
-                            <form action="/url/delete/<%= url.shortID %>" method="POST"
-                                onsubmit="return confirmDelete()">
-                                <button type="submit"
-                                    style="background-color: #ff4d4d; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-
-        </table>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">🔗 Shortify</a>
+      <div class="d-flex">
+        <% if (user && user.role === 'ADMIN') { %>
+          <a href="/admin/analytics" class="btn btn-success me-2">📊 Admin Analytics</a>
         <% } %>
-</div>
-<% if (user) { %>
-  <div class="button-container">
-    <% if (user.role === 'ADMIN') { %>
-      <a href="/admin/analytics">
-        <button class="admin-btn">📊 Admin Analytics</button>
-      </a>
+        <form action="/user/logout" method="GET" onsubmit="return confirmLogout();">
+          <button type="submit" class="btn btn-outline-light">🚪 Logout</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <!-- Success URL Message -->
+    <% if (locals.id) { %>
+      <div class="alert alert-success text-center" role="alert">
+        ✅ URL Generated: 
+        <a href="http://localhost:8001/url/<%= id %>" target="_blank">
+          http://localhost:8001/url/<%= id %>
+        </a>
+      </div>
     <% } %>
 
-    <form action="/user/logout" method="GET">
-      <button type="submit" class="logout-btn"><a href="#" onclick="confirmLogout(event)" class="logouta">🚪 Logout</a></button>
-    </form>
+    <!-- Error Message -->
+    <% if (locals.error) { %>
+      <div class="alert alert-danger text-center">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <!-- URL Submission Form -->
+    <div class="card shadow-sm mx-auto mb-4" style="max-width: 600px;">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Create a Short URL</h5>
+        <form method="POST" action="/url">
+          <div class="mb-3">
+            <label for="url" class="form-label">Original URL</label>
+            <input type="text" name="url" id="url" class="form-control" placeholder="https://example.com" required />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Generate</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- URL Table -->
+    <% if (locals.urls && urls.length > 0) { %>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+          <thead class="table-primary text-center">
+            <tr>
+              <th>#</th>
+              <th>Short ID</th>
+              <th>Original URL</th>
+              <th>Clicks</th>
+              <th>Short URL</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% urls.forEach((url, index) => { %>
+              <tr>
+                <td class="text-center"><%= index + 1 %></td>
+                <td class="text-center"><%= url.shortID %></td>
+                <td><%= url.redirectURL %></td>
+                <td class="text-center"><%= url.visitHistory.length %></td>
+                <td>
+                  <a href="http://localhost:8001/url/<%= url.shortID %>" target="_blank">
+                    http://localhost:8001/url/<%= url.shortID %>
+                  </a>
+                </td>
+                <td class="text-center">
+                  <form action="/url/delete/<%= url.shortID %>" method="POST" onsubmit="return confirm('Delete this URL?')">
+                    <button type="submit" class="btn btn-sm btn-delete">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
   </div>
-<% } %>
-
-
-<script>
-      function confirmLogout(event) {
-    event.preventDefault(); // prevent link default behavior
-    const confirmed = confirm("Are you sure you want to logout?");
-    if (confirmed) {
-      window.location.href = "/user/logout"; // redirect if confirmed
+ <%- include('partials/footer') %>
+  <!-- Scripts -->
+  <script>
+    function confirmLogout() {
+      return confirm("Are you sure you want to logout?");
     }
-  }
-    function confirmDelete(shortId) {
-        if (confirm("Are you sure you want to delete this URL?")) {
-            fetch(`/delete/${shortId}`, { method: "DELETE" })
-                .then(() => location.reload())
-                .catch(err => alert("Failed to delete"));
-        }
-    }
-</script>
-
-
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
