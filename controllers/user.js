@@ -26,10 +26,16 @@ async function handleUserSignup(req,res){
  */
 async function handleUserLogin(req,res){
     const{email,password} = req.body;
-    const user=await User.findOne({email,password}); 
+    const user=await User.findOne({email}); 
     if(!user) return res.render('login', {
         error: "Invalid Username or Password",
     });
+
+    const isMatch = await user.comparePassword(password);
+  if (!isMatch) {
+    return res.render('login', { error: 'Invalid email or password' });
+  }
+
     const token = setUser(user);
     res.cookie('token',token);
     return res.redirect("/home");
