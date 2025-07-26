@@ -4,17 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shortify | Privacy Policy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="/login.css" />
+  <link rel="stylesheet" href="footer.css">
+   <link rel="stylesheet" href="/header.css">
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">Shortify</div>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/#features">Features</a>
-      <a href="/#contact">Contact</a>
-    </nav>
-  </div>
+   <%- include('partials/header') %>
 
   <div class="container">
     <div class="info-card">
@@ -39,8 +36,7 @@
     </div>
   </div>
 
-  <footer>
-    &copy; 2025 Shortify | <a href="/privacy">Privacy Policy</a>
-  </footer>
+
+ <%- include('partials/footer') %>
 </body>
 </html>

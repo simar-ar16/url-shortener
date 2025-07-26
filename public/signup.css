@@ -7,32 +7,6 @@ body {
   background: linear-gradient(to right, #e0e7ff, #f7f9fc);
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #6a5acd;
-  padding: 15px 30px;
-  color: white;
-  font-weight: bold;
-}
-
-.navbar .logo {
-  font-size: 1.3em;
-}
-
-.navbar nav a {
-  margin-left: 20px;
-  color: white;
-  text-decoration: none;
-  font-size: 0.95em;
-}
-
-.navbar nav a:hover {
-  text-decoration: underline;
-}
-
 
 /* Container */
 .main-container {
@@ -136,4 +110,8 @@ footer a:hover {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+html, body {
+  overflow-x: hidden;
 }

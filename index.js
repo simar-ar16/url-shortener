@@ -45,6 +45,8 @@ app.get("/url/public", (req, res) => {
   return res.render("public", { id: null, error: null });
 });
 
+app.use('/public', require('./routes/public'));
+
 app.use('/url', urlRoute);
 app.use('/', staticRouter);
 

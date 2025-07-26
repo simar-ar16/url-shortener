@@ -11,7 +11,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  return res.redirect('/url/public');
+  return res.redirect('/public');
 });
 // Signup Page
 router.get('/signup', (req, res) => {

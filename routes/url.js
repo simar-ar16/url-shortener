@@ -5,31 +5,7 @@ const { handleGenerateNewShortURL, handleGetAnalytics } = require('../controller
 
 const router = express.Router();
 
-// 🟢 Public short URL generator
-router.post('/public', async (req, res) => {
-  const body = req.body;
-
-  if (!body.url) {
-    return res.render('public', {
-      id: null,
-      error: "Please enter a valid URL"
-    });
-  }
-
-  const shortID = nanoid(8);
-  await URL.create({
-    shortID: shortID,
-    redirectURL: body.url,
-    visitHistory: [],
-  });
-
-  return res.render('public', {
-    id: shortID,
-    error: null
-  });
-});
-
-// 🟢 Redirect handler
+// Redirect handler
 router.get('/:shortId', async (req, res) => {
   const shortId = req.params.shortId;
   const entry = await URL.findOne({ shortID: shortId });
