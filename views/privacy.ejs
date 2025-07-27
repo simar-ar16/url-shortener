@@ -13,6 +13,17 @@
 <body>
    <%- include('partials/header') %>
 
+   <% if (locals.user) { %>
+    <div class="d-flex justify-content-end mb-3 mt-3 me-2">
+  <a href="/home" class="btn btn-outline-primary">
+    Return to Dashboard
+  </a>
+</div>
+   <% } %>
+
+
+
+
   <div class="container">
     <div class="info-card">
       <h2>Privacy Policy</h2>
@@ -32,7 +43,7 @@
       <h3>Changes</h3>
       <p>We may update this policy occasionally. Continued use of our service means you accept those changes.</p>
 
-      <p>If you have questions, contact us at example@example.com</p>
+      <p>If you have questions, <a href="/contact">Contact Us</a></p>
     </div>
   </div>
 

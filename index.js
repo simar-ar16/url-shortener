@@ -7,6 +7,7 @@ const staticRouter = require('./routes/staticRouter');
 const userRoute = require('./routes/user');
 const { checkForAuthentication } = require('./middlewares/auth');
 const adminRoute = require('./routes/admin');
+const contactRoutes = require("./routes/contact");
 const app = express();
 
 const session = require('express-session');
@@ -20,6 +21,11 @@ app.use(session({
 app.use(flash());
 
 
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 
 const PORT = 8001;
@@ -31,6 +37,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Middlewares
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
+
+const methodOverride = require('method-override');
+app.use(methodOverride('_method')); //used to enable HTTP methods like PUT and DELETE in places where HTML forms only support GET and POST.
+
+
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -49,6 +61,24 @@ app.use('/public', require('./routes/public'));
 
 app.use('/url', urlRoute);
 app.use('/', staticRouter);
+app.use(contactRoutes);
+
+
+app.use((req, res, next) => {
+  const token = req.cookies.token;
+  if (token) {
+    try {
+      const user = getUser(token); // your function to decode token
+      res.locals.user = user;
+    } catch (err) {
+      res.locals.user = null;
+    }
+  } else {
+    res.locals.user = null;
+  }
+  next();
+});
+
 
 // Start server
 app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));

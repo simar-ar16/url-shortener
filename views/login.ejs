@@ -29,7 +29,7 @@
 
     <div class="login-box">
       <h2>Login</h2>
-      <% if (typeof error !== 'undefined') { %>
+      <% if (error && error.length > 0) { %>
   <div class="alert alert-danger mt-3" role="alert">
     <%= error %>
   </div>
