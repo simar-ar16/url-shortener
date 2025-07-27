@@ -30,8 +30,8 @@
     <% if (locals.id) { %>
       <div class="alert alert-success text-center" role="alert">
         ✅ URL Generated: 
-        <a href="http://localhost:8001/url/<%= id %>" target="_blank">
-          http://localhost:8001/url/<%= id %>
+        <a href="/url/<%= id %>" target="_blank">
+          <%= BASE_URL %>/url/<%= id %>
         </a>
       </div>
     <% } %>
@@ -79,8 +79,8 @@
                 <td><%= url.redirectURL %></td>
                 <td class="text-center"><%= url.visitHistory.length %></td>
                 <td>
-                  <a href="http://localhost:8001/url/<%= url.shortID %>" target="_blank">
-                    http://localhost:8001/url/<%= url.shortID %>
+                  <a href="/url/<%= url.shortID %>" target="_blank">
+                   <%= BASE_URL %>/url/<%= url.shortID %>
                   </a>
                 </td>
                 <td class="text-center">

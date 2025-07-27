@@ -1,5 +1,5 @@
 const jwt=require('jsonwebtoken')
-const secret='Simarsimar@2916'
+const secret=process.env.JWT_SECRET;
 
 function setUser(user){
     return jwt.sign({

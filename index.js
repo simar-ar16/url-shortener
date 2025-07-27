@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -22,16 +23,17 @@ app.use(flash());
 
 
 app.use((req, res, next) => {
+  res.locals.BASE_URL = process.env.BASE_URL;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
 });
 
 
-const PORT = 8001;
-
+const PORT = process.env.PORT;
+const mongoURI =   process.env.MONGO_LOCAL;
 // MongoDB
-connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
+connectToMongoDB(mongoURI)
   .then(() => console.log("MongoDB Connected"));
 app.use(express.static(path.join(__dirname, 'public')));
 // Middlewares

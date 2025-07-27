@@ -50,7 +50,7 @@
     <% if (id) { %>
       <p class="result">Short URL:
         <a href="/url/<%= id %>" target="_blank">
-          http://localhost:8001/url/<%= id %>
+          <%= BASE_URL %>/url/<%= id %>
         </a>
       </p>
     <% } %>
