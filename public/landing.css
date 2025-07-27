@@ -215,3 +215,93 @@ footer a {
 html {
   scroll-behavior: smooth;
 }
+/* Responsive Fixes */
+
+/* Responsive navbar dropdown */
+.custom-navbar {
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.custom-collapse {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  width: 100vw;
+  position: absolute;
+  top: 65px;
+  left: 0;
+  z-index: 1000;
+  padding: 1rem;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.custom-collapse .nav-link {
+  color: white !important;
+  font-weight: 500;
+}
+
+.custom-collapse .nav-link:hover {
+  color: #ffd369 !important;
+}
+
+@media (min-width: 992px) {
+  .custom-collapse {
+    background-color: transparent !important;
+    padding: 0;
+    position: static;
+    width: auto;
+    box-shadow: none;
+  }
+
+  .custom-collapse .nav-link {
+    color: white !important;
+  }
+
+  .custom-collapse .nav-link:hover {
+    color: #ffd369 !important;
+  }
+}
+
+
+/* Fix container on smaller screens */
+@media (max-width: 768px) {
+  .container.content-wrapper {
+    flex-direction: column;
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .info-card,
+  .login-box {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feature-card {
+    width: 100%;
+  }
+}
+
+body, .info-card, .login-box, .feature-card, footer, .navbar, .nav-link {
+  color: white !important;
+}
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.navbar {
+  margin-top: 0 !important;
+  margin-bottom: 70px;
+}
+
+body > *:first-child {
+  margin-top: 0 !important;
+}

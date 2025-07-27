@@ -1,15 +1,22 @@
-  <!-- Header / Navbar -->
-  <header class="navbar">
-    <div class="logo">🔗 Shortify</div>
-    <nav>
-      <a href="/">Home</a>
-      <% if (locals.user) { %>
-       <a href="/home">Dashboard</a>
-      <% } else { %>
-                  <a href="/login#features">Features</a>
-      <a href="/login">Login</a>
-      <a href="/signup">Sign Up</a>
-       <% } %>
+<nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/">Shortify</a>
 
-    </nav>
-  </header>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse custom-collapse" id="navbarMenu">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% if (locals.user) { %>
+         <li class="nav-item"><a class="nav-link" href="/home">Dashboard</a></li>
+        <% } else { %>
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login#features">Features</a></li>
+         <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>

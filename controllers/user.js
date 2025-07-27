@@ -16,7 +16,7 @@ async function handleUserSignup(req,res){
         email,
         password,
     });
-    return res.redirect('/');
+    return res.redirect('/login');
 }
 
 /** for login, we first take input from user and check whether valid credentials are present in db or not.

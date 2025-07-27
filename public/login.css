@@ -238,3 +238,44 @@ input[type="password"],
 input[type="text"] {
   transition: all 0.2s ease;
 }
+
+/* Purple navbar */
+.custom-navbar {
+  background-color: #6f52d9;
+}
+
+/* Toggler icon (hamburger) white */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* DESKTOP view (default): Keep white links on purple navbar */
+.custom-collapse .nav-link {
+  color: white;
+  font-weight: 500;
+}
+
+/* MOBILE view only */
+@media (max-width: 991.98px) {
+  .custom-collapse {
+    background-color: white;
+    width: 100vw;
+    position: absolute;
+    top: 56px; /* height of your navbar */
+    left: 0;
+    z-index: 1000;
+    padding: 1rem;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .custom-collapse .nav-link {
+    color: #6f52d9;
+  }
+
+  .custom-collapse .nav-link:hover {
+    color: #6f52d9;
+  }
+}
+
