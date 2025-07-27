@@ -35,11 +35,11 @@ router.post('/delete/:shortId', async (req, res) => {
   await URL.deleteOne({ shortID: shortId });
 
   if (req.user?.role === 'ADMIN') {
-    return res.redirect('/admin/analytics');
+    return res.redirect(
+      redirectFrom === 'analytics' ? '/admin/analytics' : '/home'
+    );
   }
-
-  // Otherwise (normal user or admin from home)
-  return res.redirect('/');
+  return res.redirect('/home');
 });
 
 module.exports = router;

@@ -3,8 +3,13 @@
     <div class="logo">🔗 Shortify</div>
     <nav>
       <a href="/">Home</a>
-      <a href="/login#features">Features</a>
+      <% if (locals.user) { %>
+       <a href="/home">Dashboard</a>
+      <% } else { %>
+                  <a href="/login#features">Features</a>
       <a href="/login">Login</a>
       <a href="/signup">Sign Up</a>
+       <% } %>
+
     </nav>
   </header>

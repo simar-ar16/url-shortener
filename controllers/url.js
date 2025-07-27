@@ -3,11 +3,28 @@ const URL=require('../models/url');
 
 // Generates short URL and stores flash messages (success/error) for redirect display
 async function handleGenerateNewShortURL(req, res) {
-  const { url } = req.body;
+  const { fullURL } = req.body;
+   const user = req.user;
+ const urls = await URL.find({ createdBy: user._id }).sort({ createdAt: -1 });
 
-  if (!url) {
-    req.flash('error', 'Please enter a valid URL');
-    return res.redirect('/home');
+  if (!fullURL || !fullURL.trim()) {
+    return res.render('home', {
+      id: null,
+      error: "Please provide a valid URL.",
+      user,
+      urls,
+    });
+  }
+
+  const url = fullURL.trim();
+  const isValidURL = /^(http|https):\/\/[^ "]+$/.test(url);
+ if (!isValidURL) {
+    return res.render('home', {
+      id: null,
+      error: "Invalid URL format. Use http:// or https://",
+      user,
+      urls,
+    });
   }
 
   try {

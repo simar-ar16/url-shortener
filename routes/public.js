@@ -3,13 +3,23 @@ const { nanoid } = require('nanoid');
 const URL = require('../models/url');
 
 const router=express.Router();
-// Public short URL generator
 router.post('/', async (req, res) => {
-  const { url } = req.body;
+   const { fullURL } = req.body;
 
-  if (!url) {
-    req.flash('error', 'Please enter a valid URL');
-    return res.redirect('/public');
+  if (!fullURL || !fullURL.trim()) {
+    return res.render('public', {
+      id: null,
+      error: "Please provide a valid URL.",
+    });
+  }
+
+  const url = fullURL.trim();
+  const isValidURL = /^(http|https):\/\/[^ "]+$/.test(url);
+ if (!isValidURL) {
+    return res.render('public', {
+      id: null,
+      error: "Invalid URL format. Use http:// or https://",
+    });
   }
 
   const shortID = nanoid(8);

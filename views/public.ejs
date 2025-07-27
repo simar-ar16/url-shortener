@@ -14,9 +14,13 @@
   <div class="logo">🔗 Shortify</div>
   <nav>
     <a href="/">Home</a>
-    <a href="#features">Features</a>
+    <% if (!locals.user) { %>
+         <a href="#features">Features</a>
     <a href="/login">Login</a>
     <a href="/signup">Sign Up</a>
+    <% } else { %>
+      <a href="/home">Dashboard</a>
+    <% } %> 
   </nav>
 </header>
 
@@ -32,7 +36,7 @@
   <div class="login-box">
     <h2>Paste Your Long URL</h2>
     <form action="/public" method="POST">
-      <input type="text" name="url" placeholder="https://example.com" required />
+      <input type="text" name="fullURL" placeholder="https://example.com" required />
       <button type="submit">Generate Short Link</button>
     </form>
 
