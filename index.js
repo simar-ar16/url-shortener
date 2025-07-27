@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 
 
 const PORT = process.env.PORT;
-const mongoURI =   process.env.MONGO_LOCAL;
+const mongoURI = process.env.MONGO_URL || process.env.MONGO_LOCAL;
 // MongoDB
 connectToMongoDB(mongoURI)
   .then(() => console.log("MongoDB Connected"));
