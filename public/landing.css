@@ -305,3 +305,29 @@ html, body {
 body > *:first-child {
   margin-top: 0 !important;
 }
+
+#gen-qr-btn {
+  width: 100px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+#gen-qr-btn i {
+  font-size: 1.1rem;
+}
+.btn-danger {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: white !important;
+}
+.short-url-link {
+  color: #05367f; /* Bright Bootstrap primary blue */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.short-url-link:hover {
+  text-decoration: underline;
+  color: #0a58ca; /* Darker blue on hover */
+}

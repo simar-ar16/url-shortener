@@ -9,6 +9,7 @@ const userRoute = require('./routes/user');
 const { checkForAuthentication } = require('./middlewares/auth');
 const adminRoute = require('./routes/admin');
 const contactRoutes = require("./routes/contact");
+const qrRoutes = require('./routes/qr');
 const app = express();
 
 const session = require('express-session');
@@ -63,6 +64,7 @@ app.use('/public', require('./routes/public'));
 
 app.use('/url', urlRoute);
 app.use('/', staticRouter);
+app.use(qrRoutes);
 app.use(contactRoutes);
 
 

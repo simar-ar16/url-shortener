@@ -68,6 +68,7 @@
               <th>Original URL</th>
               <th>Clicks</th>
               <th>Short URL</th>
+              <th>QR Code</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -83,6 +84,13 @@
                    <%= BASE_URL %>/url/<%= url.shortID %>
                   </a>
                 </td>
+                <td><button type="button" class="btn btn-sm btn-info text-white gen-qr-btn"
+        data-url="<%= BASE_URL %>/url/<%= url.shortID %>">
+  <i class="bi bi-qr-code">Show QR</i> 
+</button>
+
+                </td>
+
                 <td class="text-center">
                   <form action="/url/delete/<%= url.shortID %>" method="POST" onsubmit="return confirm('Delete this URL?')">
                     <button type="submit" class="btn btn-sm btn-delete">Delete</button>
@@ -95,6 +103,17 @@
       </div>
     <% } %>
   </div>
+  <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <h5 class="modal-title mb-3" id="qrModalLabel">Your QR Code</h5>
+      <div id="qr-img-container" class="mb-3"></div>
+      <button id="download-btn" class="btn btn-success">
+        <i class="bi bi-download"></i> Download QR
+      </button>
+    </div>
+  </div>
+</div>
  <%- include('partials/footer') %>
   <!-- Scripts -->
   <script>
@@ -102,6 +121,42 @@
       return confirm("Are you sure you want to logout?");
     }
   </script>
+  <script>
+    document.querySelectorAll('.gen-qr-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+  const shortUrl = btn.getAttribute('data-url');
+  const qrImgContainer = document.getElementById('qr-img-container');
+  
+  qrImgContainer.innerHTML = 'Generating...';
+
+  try {
+    const res = await fetch('/api/generate-qr', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: shortUrl })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    qrImgContainer.innerHTML = `<img src="${data.qrDataUrl}" alt="QR Code" class="img-fluid" style="max-width:200px;">`;
+
+    document.getElementById('download-btn').onclick = () => {
+      const a = document.createElement('a');
+      a.href = data.qrDataUrl;
+      a.download = 'qrcode.png';
+      a.click();
+    };
+
+    const qrModal = new bootstrap.Modal(document.getElementById('qrModal'));
+    qrModal.show();
+
+  } catch (err) {
+    qrImgContainer.innerHTML = `<p class="text-danger">Error: ${err.message}</p>`;
+  }
+});
+    })
+
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -37,6 +37,7 @@
     <h2>Welcome to Shortify!</h2>
     <p>Shortify helps you convert long, messy URLs into clean, shareable links instantly.</p>
     <p>Use it without login, or create an account to track click analytics!</p>
+    <p>Now with built-in QR code generation — instantly create and download QR codes for your links.</p>
     <p>Safe, fast, and completely free.</p>
   </div>
 
@@ -47,19 +48,35 @@
       <button type="submit">Generate Short Link</button>
     </form>
 
-    <% if (id) { %>
-      <p class="result">Short URL:
-        <a href="/url/<%= id %>" target="_blank">
-          <%= BASE_URL %>/url/<%= id %>
-        </a>
-      </p>
-    <% } %>
+<% if (id) { %>
+  <div class="d-flex align-items-center gap-2 mt-2">Short URL:
+    <a href="/url/<%= id %>" target="_blank" class="short-url-link">
+      <%= BASE_URL %>/url/<%= id %>
+    </a>
+    <button type="button" id="gen-qr-btn" class="btn btn-sm btn-danger">
+      <i class="bi bi-qr-code"></i> Show QR
+    </button>
+  </div>
+<% } %>
+
 
     <% if (error) { %>
       <div class="error-box"><%= error %></div>
     <% } %>
 
-    <p style="margin-top: 15px;">Want to see click analytics? <a href="/login">Login here</a></p>
+    <p style="margin-top: 15px;">Want to see click analytics? <a href="/login" style=" color: #05367f;">Login here</a></p>
+  </div>
+</div>
+
+<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <h5 class="modal-title mb-3" id="qrModalLabel">Your QR Code</h5>
+      <div id="qr-img-container" class="mb-3"></div>
+      <button id="download-btn" class="btn btn-success">
+        <i class="bi bi-download"></i> Download QR
+      </button>
+    </div>
   </div>
 </div>
 
@@ -91,6 +108,40 @@
   </p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>\
+<script>
+document.getElementById('gen-qr-btn')?.addEventListener('click', async () => {
+  const shortUrl = `<%= BASE_URL %>/url/<%= id %>`;
+  const qrImgContainer = document.getElementById('qr-img-container');
+  
+  qrImgContainer.innerHTML = 'Generating...';
+
+  try {
+    const res = await fetch('/api/generate-qr', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: shortUrl })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    qrImgContainer.innerHTML = `<img src="${data.qrDataUrl}" alt="QR Code" class="img-fluid" style="max-width:200px;">`;
+
+    document.getElementById('download-btn').onclick = () => {
+      const a = document.createElement('a');
+      a.href = data.qrDataUrl;
+      a.download = 'qrcode.png';
+      a.click();
+    };
+
+    const qrModal = new bootstrap.Modal(document.getElementById('qrModal'));
+    qrModal.show();
+
+  } catch (err) {
+    qrImgContainer.innerHTML = `<p class="text-danger">Error: ${err.message}</p>`;
+  }
+});
+</script>
+
 </body>
 </html>
