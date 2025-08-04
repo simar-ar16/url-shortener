@@ -10,10 +10,13 @@ router.get('/:shortId', async (req, res) => {
   const shortId = req.params.shortId;
   const entry = await URL.findOne({ shortID: shortId });
 
-  if (!entry) return res.status(404).send("Short URL not found");
-
-  entry.visitHistory.push({ timestamp: Date.now() });
-  await entry.save();
+  if (!entry) {
+    return res.status(404).send("Short URL not found");
+  }
+  if (req.method === 'GET') {
+    entry.visitHistory.push({ timestamp: Date.now() });
+    await entry.save();
+  }
 
   return res.redirect(entry.redirectURL);
 });
